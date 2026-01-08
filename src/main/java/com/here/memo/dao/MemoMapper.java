@@ -10,5 +10,7 @@ public interface MemoMapper {
 
     List<MemoDto> selectMemoList(MemoDto Memo);
 
-    int saveMemo(MemoDto Memo);
+    int insertMemo(MemoDto Memo);
+
+    int updateMemo(MemoDto Memo);
 }

@@ -12,7 +12,7 @@
         ORDER BY memo_id DESC
     </select>
 
-    <insert id="saveMemo" parameterType="com.here.memo.dto.MemoDto">
+    <insert id="insertMemo" parameterType="com.here.memo.dto.MemoDto">
         INSERT INTO tb_memo(
              user_id,
              reg_date,
@@ -34,5 +34,15 @@
             now()
         );
     </insert>
+
+    <update id="updateMemo" parameterType="com.here.memo.dto.MemoDto">
+        UPDATE TB_MEMO SET
+            title = #{title},
+            memo_content = #{memoContent},
+            upd_id = #{userId},
+            upd_dt = now()
+        WHERE memo_id = #{memoId}
+        ;
+    </update>
 
 </mapper>

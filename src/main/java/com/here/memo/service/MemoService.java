@@ -20,6 +20,10 @@ public class MemoService {
     }
 
     public int saveMemo(MemoDto param) {
-        return memoMapper.saveMemo(param);
+        if(param.getMemoId() != null && param.getMemoId() > 0){
+            return memoMapper.updateMemo(param);
+        }else{
+            return memoMapper.insertMemo(param);
+        }
     }
 }
