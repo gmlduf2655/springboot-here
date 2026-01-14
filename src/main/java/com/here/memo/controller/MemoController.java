@@ -25,8 +25,6 @@ public class MemoController {
 
     @PostMapping("/save")
     public int save(@RequestBody MemoDto param) {
-        System.out.println("userId : " + param.getUserId());
-        System.out.println("title : " + param.getTitle());
         return memoService.saveMemo(param);
     }
 }

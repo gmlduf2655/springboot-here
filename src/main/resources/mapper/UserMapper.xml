@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.here.user.dao.UserMapper">
+
+    <select id="selectUserList" parameterType="com.here.user.dto.UserDto" resultType="com.here.user.dto.UserDto">
+        SELECT user_id, reg_date, user_name, email, address
+        FROM   tb_user
+        order by reg_date desc, user_name;
+    </select>
+
+    <select id="selectUser" parameterType="com.here.user.dto.UserDto" resultType="com.here.user.dto.UserDto">
+        SELECT user_id, reg_date, user_name, email, address
+        FROM   tb_user
+        WHERE  user_id = #{userId}
+    </select>
+
+    <select id="loginUser" parameterType="com.here.user.dto.UserDto" resultType="com.here.user.dto.UserDto">
+        SELECT user_id, reg_date, user_name, email, address
+        FROM   tb_user
+        WHERE  user_id = #{userId}
+        AND    user_pwd = #{userPwd}
+    </select>
+
+    <select id="selectUserCnt" parameterType="com.here.user.dto.UserDto" resultType="com.here.user.dto.UserDto">
+        SELECT count(*) as cnt
+        FROM   tb_user
+        WHERE  user_id = #{userId}
+    </select>
+
+    <insert id="saveUser" parameterType="com.here.user.dto.UserDto">
+        INSERT INTO tb_user(
+            user_id,
+            user_pwd,
+            reg_date,
+            user_name,
+            email,
+            address,
+            upd_id,
+            upd_dt,
+            reg_id,
+            reg_dt
+        ) VALUES(
+            #{userId},
+            #{userPwd},
+            now()::date,
+            #{userName},
+            #{email},
+            #{address},
+            #{userId},
+            now(),
+            #{userId},
+            now()
+        )
+        ON CONFLICT (user_id)
+        DO UPDATE SET
+           user_name = #{userName},
+           email    = #{email},
+           address  = #{address},
+           upd_id   = #{userId},
+           upd_dt   = now()
+        ;
+    </insert>
+
+    <insert id="insertUser" parameterType="com.here.user.dto.UserDto">
+        INSERT INTO tb_user(
+            user_id,
+            user_pwd,
+            reg_date,
+            user_name,
+            email,
+            address,
+            upd_id,
+            upd_dt,
+            reg_id,
+
+        ) VALUES(
+            #{userId},
+            #{userPwd},
+            now()::date,
+            #{userName},
+            #{email},
+            #{address},
+            #{userId},
+            now(),
+            #{userId},
+            now()
+        );
+    </insert>
+
+    <update id="updateUser" parameterType="com.here.user.dto.UserDto">
+        UPDATE TB_USER SET
+            user_name = #{userName},
+            email    = #{email},
+            address  = #{address},
+            upd_id   = #{userId},
+            upd_dt   = now()
+        WHERE user_id = #{userId}
+        ;
+    </update>
+
+    <update id="updateUserPwd" parameterType="com.here.user.dto.UserDto">
+        UPDATE TB_USER SET
+           user_pwd = #{userPwd},
+           upd_id   = #{userId},
+           upd_dt   = now()
+        WHERE user_id = #{userId}
+        ;
+    </update>
+
+</mapper>

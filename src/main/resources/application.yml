@@ -19,5 +19,6 @@ mybatis:
 logging:
   level:
     com.here.memo.dao: DEBUG
+    com.here.user.dao: DEBUG
     org.mybatis: DEBUG
     jdbc.sqlonly: DEBUG
