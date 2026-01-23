@@ -8,7 +8,7 @@
     <select id="selectMemoList" parameterType="com.here.memo.dto.MemoDto" resultType="com.here.memo.dto.MemoDto">
         SELECT memo_id, reg_date, user_id, title, memo_content, upd_id, upd_dt, reg_id, reg_dt
         FROM tb_memo
-        WHERE reg_date = #{regDate}::date
+        WHERE reg_date between #{startDate}::date and #{endDate}::date
         ORDER BY memo_id DESC
     </select>
 

@@ -15,5 +15,6 @@ public class MemoDto {
     private String regDate;
     private String title;
     private String memoContent;
-
+    private String startDate;
+    private String endDate;
 }
