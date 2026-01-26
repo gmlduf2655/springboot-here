@@ -13,4 +13,5 @@ public interface MemoMapper {
     int insertMemo(MemoDto Memo);
 
     int updateMemo(MemoDto Memo);
+    int deleteMemo(MemoDto Memo);
 }

@@ -23,8 +23,13 @@ public class MemoController {
         return memoService.selectMemoList(param);
     }
 
-    @PostMapping("/save")
-    public int save(@RequestBody MemoDto param) {
+    @PostMapping("/saveMemo")
+    public int saveMemo(@RequestBody MemoDto param) {
         return memoService.saveMemo(param);
+    }
+
+    @PostMapping("/deleteMemo")
+    public int deleteMemo(@RequestBody MemoDto param) {
+        return memoService.deleteMemo(param);
     }
 }

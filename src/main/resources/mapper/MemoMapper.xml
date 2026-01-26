@@ -45,4 +45,8 @@
         ;
     </update>
 
+    <update id="deleteMemo" parameterType="com.here.memo.dto.MemoDto">
+        DELETE FROM TB_MEMO WHERE memo_id = #{memoId};
+    </update>
+
 </mapper>

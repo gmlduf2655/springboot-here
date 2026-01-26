@@ -26,4 +26,8 @@ public class MemoService {
             return memoMapper.insertMemo(param);
         }
     }
+
+    public int deleteMemo(MemoDto param) {
+        return memoMapper.deleteMemo(param);
+    }
 }
