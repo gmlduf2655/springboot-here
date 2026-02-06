@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MemoDto {
 
-    private Long memoId;
+    private String memoId;
     private String userId;
     private String userName;
     private String regDate;

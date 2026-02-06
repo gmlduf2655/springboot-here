@@ -12,8 +12,74 @@
         ORDER BY memo_id DESC
     </select>
 
+    <insert id="saveMemo" parameterType="com.here.memo.dto.MemoDto">
+        INSERT INTO tb_memo (
+            memo_id,
+            user_id,
+            reg_date,
+            title,
+            memo_content,
+            upd_id,
+            upd_dt,
+            reg_id,
+            reg_dt
+        )
+        VALUES (
+           #{memoId},
+           #{userId},
+           #{regDate}::date,
+           #{title},
+           #{memoContent},
+           #{userId},
+           now(),
+           #{userId},
+           now()
+        )
+        ON CONFLICT (memo_id)
+        DO UPDATE SET
+            title = EXCLUDED.title,
+            memo_content = EXCLUDED.memo_content,
+            upd_id = #{userId}
+            upd_dt = now();
+    </insert>
+
+    <insert id="saveMemos" parameterType="com.here.memo.dto.MemoDto">
+        INSERT INTO tb_memo (
+            memo_id,
+            user_id,
+            reg_date,
+            title,
+            memo_content,
+            upd_id,
+            upd_dt,
+            reg_id,
+            reg_dt
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.memoId},
+                #{item.userId},
+                #{item.regDate}::date,
+                #{item.title},
+                #{item.memoContent},
+                #{item.userId},
+                now(),
+                #{item.userId},
+                now()
+            )
+        </foreach>
+        ON CONFLICT (memo_id)
+        DO UPDATE SET
+            title = EXCLUDED.title,
+                           memo_content = EXCLUDED.memo_content,
+                           upd_id = EXCLUDED.user_id,
+                           upd_dt = now();
+    </insert>
+
     <insert id="insertMemo" parameterType="com.here.memo.dto.MemoDto">
         INSERT INTO tb_memo(
+             memo_id,
              user_id,
              reg_date,
              title,
@@ -24,6 +90,7 @@
              reg_dt
         )
         VALUES(
+            #{memoId},
             #{userId},
             #{regDate}::date,
             #{title},
