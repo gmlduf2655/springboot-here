@@ -3,34 +3,35 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.here.user.dao.UserMapper">
+<mapper namespace="com.here.dao.UserMapper">
 
-    <select id="selectUserList" parameterType="com.here.user.dto.UserDto" resultType="com.here.user.dto.UserDto">
+    <select id="selectUserList" parameterType="com.here.dto.UserDto" resultType="com.here.dto.UserDto">
         SELECT user_id, reg_date, user_name, email, address
         FROM   tb_user
         order by reg_date desc, user_name;
     </select>
 
-    <select id="selectUser" parameterType="com.here.user.dto.UserDto" resultType="com.here.user.dto.UserDto">
+    <select id="selectUser" parameterType="com.here.dto.UserDto" resultType="com.here.dto.UserDto">
         SELECT user_id, reg_date, user_name, email, address
         FROM   tb_user
         WHERE  user_id = #{userId}
     </select>
 
-    <select id="loginUser" parameterType="com.here.user.dto.UserDto" resultType="com.here.user.dto.UserDto">
-        SELECT user_id, reg_date, user_name, email, address
+    <select id="loginUser" parameterType="com.here.dto.UserDto" resultType="com.here.dto.UserDto">
+        SELECT user_id, reg_date, user_name, email, address,
+               case when adm_yn = 'Y' THEN '관리자' ELSE '사용자' END AS position
         FROM   tb_user
         WHERE  user_id = #{userId}
         AND    user_pwd = #{userPwd}
     </select>
 
-    <select id="selectUserCnt" parameterType="com.here.user.dto.UserDto" resultType="com.here.user.dto.UserDto">
+    <select id="selectUserCnt" parameterType="com.here.dto.UserDto" resultType="com.here.dto.UserDto">
         SELECT count(*) as cnt
         FROM   tb_user
         WHERE  user_id = #{userId}
     </select>
 
-    <insert id="saveUser" parameterType="com.here.user.dto.UserDto">
+    <insert id="saveUser" parameterType="com.here.dto.UserDto">
         INSERT INTO tb_user(
             user_id,
             user_pwd,
@@ -64,7 +65,7 @@
         ;
     </insert>
 
-    <insert id="insertUser" parameterType="com.here.user.dto.UserDto">
+    <insert id="insertUser" parameterType="com.here.dto.UserDto">
         INSERT INTO tb_user(
             user_id,
             user_pwd,
@@ -90,7 +91,7 @@
         );
     </insert>
 
-    <update id="updateUser" parameterType="com.here.user.dto.UserDto">
+    <update id="updateUser" parameterType="com.here.dto.UserDto">
         UPDATE TB_USER SET
             user_name = #{userName},
             email    = #{email},
@@ -101,7 +102,7 @@
         ;
     </update>
 
-    <update id="updateUserPwd" parameterType="com.here.user.dto.UserDto">
+    <update id="updateUserPwd" parameterType="com.here.dto.UserDto">
         UPDATE TB_USER SET
            user_pwd = #{userPwd},
            upd_id   = #{userId},

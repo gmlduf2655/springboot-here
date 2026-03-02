@@ -1,6 +1,6 @@
-package com.here.memo.dao;
+package com.here.dao;
 
-import com.here.memo.dto.MemoDto;
+import com.here.dto.MemoDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

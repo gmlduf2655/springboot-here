@@ -3,16 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.here.memo.dao.MemoMapper">
+<mapper namespace="com.here.dao.MemoMapper">
 
-    <select id="selectMemoList" parameterType="com.here.memo.dto.MemoDto" resultType="com.here.memo.dto.MemoDto">
+    <select id="selectMemoList" parameterType="com.here.dto.MemoDto" resultType="com.here.dto.MemoDto">
         SELECT memo_id, reg_date, user_id, title, memo_content, upd_id, upd_dt, reg_id, reg_dt
         FROM tb_memo
         WHERE reg_date between #{startDate}::date and #{endDate}::date
         ORDER BY memo_id DESC
     </select>
 
-    <insert id="saveMemo" parameterType="com.here.memo.dto.MemoDto">
+    <insert id="saveMemo" parameterType="com.here.dto.MemoDto">
         INSERT INTO tb_memo (
             memo_id,
             user_id,
@@ -43,7 +43,7 @@
             upd_dt = now();
     </insert>
 
-    <insert id="saveMemos" parameterType="com.here.memo.dto.MemoDto">
+    <insert id="saveMemos" parameterType="com.here.dto.MemoDto">
         INSERT INTO tb_memo (
             memo_id,
             user_id,
@@ -78,7 +78,7 @@
         ;
     </insert>
 
-    <insert id="insertMemo" parameterType="com.here.memo.dto.MemoDto">
+    <insert id="insertMemo" parameterType="com.here.dto.MemoDto">
         INSERT INTO tb_memo(
              memo_id,
              user_id,
@@ -103,7 +103,7 @@
         );
     </insert>
 
-    <update id="updateMemo" parameterType="com.here.memo.dto.MemoDto">
+    <update id="updateMemo" parameterType="com.here.dto.MemoDto">
         UPDATE TB_MEMO SET
             title = #{title},
             memo_content = #{memoContent},
@@ -113,7 +113,7 @@
         ;
     </update>
 
-    <update id="deleteMemo" parameterType="com.here.memo.dto.MemoDto">
+    <update id="deleteMemo" parameterType="com.here.dto.MemoDto">
         DELETE FROM TB_MEMO WHERE memo_id = #{memoId};
     </update>
 

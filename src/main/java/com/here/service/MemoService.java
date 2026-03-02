@@ -1,7 +1,7 @@
-package com.here.memo.service;
+package com.here.service;
 
-import com.here.memo.dao.MemoMapper;
-import com.here.memo.dto.MemoDto;
+import com.here.dao.MemoMapper;
+import com.here.dto.MemoDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

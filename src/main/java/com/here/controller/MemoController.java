@@ -1,11 +1,9 @@
-package com.here.memo.controller;
+package com.here.controller;
 
-import com.here.memo.service.MemoService;
-import com.here.memo.dto.MemoDto;
-import com.here.memo.dto.MemoCsvDto;
+import com.here.service.MemoService;
+import com.here.dto.MemoDto;
+import com.here.dto.MemoCsvDto;
 import com.opencsv.bean.CsvToBeanBuilder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

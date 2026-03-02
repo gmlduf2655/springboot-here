@@ -1,6 +1,6 @@
-package com.here.user.dao;
+package com.here.dao;
 
-import com.here.user.dto.UserDto;
+import com.here.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

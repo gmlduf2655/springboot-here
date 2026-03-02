@@ -1,7 +1,7 @@
-package com.here.user.service;
+package com.here.service;
 
-import com.here.user.dao.UserMapper;
-import com.here.user.dto.UserDto;
+import com.here.dao.UserMapper;
+import com.here.dto.UserDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

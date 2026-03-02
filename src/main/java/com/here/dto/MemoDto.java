@@ -1,4 +1,4 @@
-package com.here.user.dto;
+package com.here.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,14 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class MemoDto {
 
-    private int cnt;
+    private String memoId;
     private String userId;
-    private String userPwd;
     private String userName;
     private String regDate;
-    private String email;
-    private String address;
-
+    private String title;
+    private String memoContent;
+    private String startDate;
+    private String endDate;
 }

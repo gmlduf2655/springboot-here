@@ -1,7 +1,7 @@
-package com.here.user.controller;
+package com.here.controller;
 
-import com.here.user.dto.UserDto;
-import com.here.user.service.UserService;
+import com.here.dto.UserDto;
+import com.here.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
