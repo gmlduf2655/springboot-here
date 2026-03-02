@@ -39,7 +39,7 @@
         DO UPDATE SET
             title = EXCLUDED.title,
             memo_content = EXCLUDED.memo_content,
-            upd_id = #{userId}
+            upd_id = EXCLUDED.upd_id,
             upd_dt = now();
     </insert>
 
@@ -72,9 +72,10 @@
         ON CONFLICT (memo_id)
         DO UPDATE SET
             title = EXCLUDED.title,
-                           memo_content = EXCLUDED.memo_content,
-                           upd_id = EXCLUDED.user_id,
-                           upd_dt = now();
+            memo_content = EXCLUDED.memo_content,
+            upd_id = EXCLUDED.upd_id,
+            upd_dt = now()
+        ;
     </insert>
 
     <insert id="insertMemo" parameterType="com.here.memo.dto.MemoDto">

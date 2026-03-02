@@ -56,10 +56,10 @@
         )
         ON CONFLICT (user_id)
         DO UPDATE SET
-           user_name = #{userName},
-           email    = #{email},
-           address  = #{address},
-           upd_id   = #{userId},
+           user_name = EXCLUDED.user_name,
+           email    = EXCLUDED.email,
+           address  = EXCLUDED.address,
+           upd_id   = EXCLUDED.upd_id,
            upd_dt   = now()
         ;
     </insert>
