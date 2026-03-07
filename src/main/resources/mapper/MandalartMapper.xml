@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.here.dao.MandalartMapper">
+
+    <select id="selectMandalartList" parameterType="com.here.dto.MandalartDto" resultType="com.here.dto.MandalartDto">
+        SELECT mandalart_id,
+               user_id,
+               TO_CHAR(MIN(reg_date), 'YYYY-MM-DD') AS reg_date,
+               COALESCE(MAX(CASE WHEN cell_row = '4' AND cell_col = '4' THEN mandalart_content END), '') AS mandalart_title
+        FROM   tb_mandalart_node
+        WHERE  user_id = #{userId}
+        AND    reg_date between #{startDate}::date and #{endDate}::date
+        GROUP BY mandalart_id, user_id
+        ORDER BY MIN(reg_date) DESC
+    </select>
+
+    <select id="selectMandalartNodeList" parameterType="com.here.dto.MandalartDto" resultType="com.here.dto.MandalartDto">
+        SELECT cell_id, mandalart_id, user_id, reg_date, lvl, cell_row, cell_col, mandalart_content,
+               upd_id, upd_dt, reg_id, reg_dt
+        FROM   tb_mandalart_node
+        WHERE  mandalart_id = #{mandalartId}
+        AND    user_id = #{userId}
+        ORDER BY lvl, cell_row, cell_col
+    </select>
+
+    <select id="selectMandalartNode" parameterType="com.here.dto.MandalartDto" resultType="com.here.dto.MandalartDto">
+        SELECT cell_id, mandalart_id, user_id, reg_date, lvl, cell_row, cell_col, mandalart_content,
+               upd_id, upd_dt, reg_id, reg_dt
+        FROM   tb_mandalart_node
+        WHERE  mandalart_id = #{mandalartId}
+        AND    cell_id = #{cellId}
+    </select>
+
+    <insert id="saveMandalartNode" parameterType="com.here.dto.MandalartDto">
+        INSERT INTO tb_mandalart_node (
+            cell_id,
+            mandalart_id,
+            user_id,
+            reg_date,
+            lvl,
+            cell_row,
+            cell_col,
+            mandalart_content,
+            upd_id,
+            upd_dt,
+            reg_id,
+            reg_dt
+        ) VALUES (
+            #{cellId},
+            #{mandalartId},
+            #{userId},
+            #{regDate}::date,
+            #{lvl},
+            #{cellRow},
+            #{cellCol},
+            #{mandalartContent},
+            #{userId},
+            now(),
+            #{userId},
+            now()
+        )
+        ON CONFLICT (mandalart_id, cell_id)
+        DO UPDATE SET
+            mandalart_content = EXCLUDED.mandalart_content,
+            upd_id            = EXCLUDED.upd_id,
+            upd_dt            = now()
+        ;
+    </insert>
+
+    <insert id="saveMandalartNodes" parameterType="com.here.dto.MandalartDto">
+        INSERT INTO tb_mandalart_node (
+            cell_id,
+            mandalart_id,
+            user_id,
+            reg_date,
+            lvl,
+            cell_row,
+            cell_col,
+            mandalart_content,
+            upd_id,
+            upd_dt,
+            reg_id,
+            reg_dt
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.cellId},
+                #{item.mandalartId},
+                #{item.userId},
+                #{item.regDate}::date,
+                #{item.lvl},
+                #{item.cellRow},
+                #{item.cellCol},
+                #{item.mandalartContent},
+                #{item.userId},
+                now(),
+                #{item.userId},
+                now()
+            )
+        </foreach>
+        ON CONFLICT (mandalart_id, cell_id)
+        DO UPDATE SET
+            mandalart_content = EXCLUDED.mandalart_content,
+            upd_id            = EXCLUDED.upd_id,
+            upd_dt            = now()
+        ;
+    </insert>
+
+    <insert id="insertMandalartNode" parameterType="com.here.dto.MandalartDto">
+        INSERT INTO tb_mandalart_node (
+            cell_id,
+            mandalart_id,
+            user_id,
+            reg_date,
+            lvl,
+            cell_row,
+            cell_col,
+            mandalart_content,
+            upd_id,
+            upd_dt,
+            reg_id,
+            reg_dt
+        ) VALUES (
+            #{cellId},
+            #{mandalartId},
+            #{userId},
+            #{regDate}::date,
+            #{lvl},
+            #{cellRow},
+            #{cellCol},
+            #{mandalartContent},
+            #{userId},
+            now(),
+            #{userId},
+            now()
+        );
+    </insert>
+
+    <update id="updateMandalartNode" parameterType="com.here.dto.MandalartDto">
+        UPDATE tb_mandalart_node SET
+            mandalart_content = #{mandalartContent},
+            upd_id            = #{userId},
+            upd_dt            = now()
+        WHERE mandalart_id = #{mandalartId}
+        AND   cell_id = #{cellId}
+        ;
+    </update>
+
+    <update id="deleteMandalartNode" parameterType="com.here.dto.MandalartDto">
+        DELETE FROM tb_mandalart_node
+        WHERE mandalart_id = #{mandalartId}
+        AND   cell_id = #{cellId}
+        ;
+    </update>
+
+    <update id="deleteMandalartNodes" parameterType="com.here.dto.MandalartDto">
+        DELETE FROM tb_mandalart_node
+        WHERE mandalart_id = #{mandalartId}
+        AND   user_id = #{userId}
+        ;
+    </update>
+
+</mapper>
