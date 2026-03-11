@@ -15,6 +15,7 @@
                dump_content,
                goal_id,
                priority_yn,
+               complete_yn,
                status,
                reg_id,
                TO_CHAR(reg_dt, 'YYYY-MM-DD HH24:MI:SS') AS reg_dt,
@@ -69,7 +70,36 @@
         ;
     </delete>
 
+    <delete id="deleteBrainDumpList" parameterType="com.here.dto.BrainDumpDto">
+        DELETE FROM tb_tbox_brain_dump
+        WHERE dump_id IN
+        <foreach collection="dumpIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        ;
+    </delete>
+
     <!-- ===================== Time Table ===================== -->
+
+    <select id="selectTimeTableByDumpId" parameterType="com.here.dto.TimeTableDto" resultType="com.here.dto.TimeTableDto">
+        SELECT tt.time_table_id,
+        tt.dump_id,
+        TO_CHAR(tt.tbox_date, 'YYYY-MM-DD') AS tbox_date,
+        tt.user_id,
+        tt.time_hour,
+        tt.time_minute,
+        tt.color,
+        bd.dump_title,
+        bd.dump_content,
+        bd.priority_yn,
+        bd.complete_yn,
+        bd.status
+        FROM   tb_tbox_time_table tt
+        LEFT JOIN tb_tbox_brain_dump bd ON tt.dump_id = bd.dump_id
+        WHERE  tt.user_id = #{userId}
+        AND    tt.dump_id = #{dumpId}
+        ORDER BY tt.time_hour, tt.time_minute
+    </select>
 
     <select id="selectTimeTableList" parameterType="com.here.dto.TimeTableDto" resultType="com.here.dto.TimeTableDto">
         SELECT tt.time_table_id,
@@ -85,6 +115,7 @@
                TO_CHAR(tt.mod_dt, 'YYYY-MM-DD HH24:MI:SS') AS mod_dt,
                bd.dump_title,
                bd.priority_yn,
+               bd.complete_yn,
                bd.status
         FROM   tb_tbox_time_table tt
         LEFT JOIN tb_tbox_brain_dump bd ON tt.dump_id = bd.dump_id

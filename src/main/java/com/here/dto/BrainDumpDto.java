@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,6 +18,7 @@ public class BrainDumpDto {
     private String dumpContent;
     private String goalId;
     private String priorityYn;
+    private String completeYn;
     private String status;
     private String regId;
     private String regDt;
@@ -25,4 +28,7 @@ public class BrainDumpDto {
     // 조회 필터용
     private String startDate;
     private String endDate;
+
+    // 일괄 삭제용
+    private List<String> dumpIds;
 }

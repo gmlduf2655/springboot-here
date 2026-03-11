@@ -33,10 +33,19 @@ public class TimeBoxController {
         return timeBoxService.deleteBrainDump(param);
     }
 
+    @PostMapping("/deleteBrainDumpList")
+    public int deleteBrainDumpList(@RequestBody BrainDumpDto param) {
+        return timeBoxService.deleteBrainDumpList(param);
+    }
+
     // Time Table
     @GetMapping("/selectTimeTableList")
     public List<TimeTableDto> selectTimeTableList(TimeTableDto param) {
         return timeBoxService.selectTimeTableList(param);
+    }
+    @GetMapping("/selectTimeTableByDumpId")
+    public List<TimeTableDto> selectTimeTableByDumpId(TimeTableDto param) {
+        return timeBoxService.selectTimeTableByDumpId(param);
     }
 
     @PostMapping("/saveTimeTable")

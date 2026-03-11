@@ -33,9 +33,16 @@ public class TimeBoxService {
         return timeBoxMapper.deleteBrainDump(param);
     }
 
+    public int deleteBrainDumpList(BrainDumpDto param) {
+        return timeBoxMapper.deleteBrainDumpList(param);
+    }
+
     // Time Table
     public List<TimeTableDto> selectTimeTableList(TimeTableDto param) {
         return timeBoxMapper.selectTimeTableList(param);
+    }
+    public List<TimeTableDto> selectTimeTableByDumpId(TimeTableDto param) {
+        return timeBoxMapper.selectTimeTableByDumpId(param);
     }
 
     public int saveTimeTable(TimeTableDto param) {

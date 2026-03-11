@@ -13,9 +13,11 @@ public interface TimeBoxMapper {
     List<BrainDumpDto> selectBrainDumpList(BrainDumpDto param);
     int saveBrainDump(BrainDumpDto param);
     int deleteBrainDump(BrainDumpDto param);
+    int deleteBrainDumpList(BrainDumpDto param);
 
     // Time Table
     List<TimeTableDto> selectTimeTableList(TimeTableDto param);
+    List<TimeTableDto> selectTimeTableByDumpId(TimeTableDto param);
     int saveTimeTable(TimeTableDto param);
     int deleteTimeTable(TimeTableDto param);
 }
