@@ -44,7 +44,7 @@ public class TimeBoxService {
 
     // Weekly Time Table
     public List<TimeTableDto> selectWeeklyTimeTableList(TimeTableDto param) {
-        return timeBoxMapper.selectTimeTableList(param);
+        return timeBoxMapper.selectWeeklyTimeTableList(param);
     }
 
     public List<TimeTableDto> selectTimeTableByDumpId(TimeTableDto param) {
