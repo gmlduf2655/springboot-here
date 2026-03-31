@@ -21,7 +21,7 @@ public class MemoService {
     }
 
     public int saveMemo(MemoDto param) {
-        if(param.getMemoId() != null && param.getMemoId().isEmpty()){
+        if(param.getMemoId() == null || param.getMemoId().isEmpty()){
             String uuid = UUID.randomUUID().toString();
             param.setMemoId(uuid);
         }
@@ -30,7 +30,7 @@ public class MemoService {
 
     public int saveMemos(List<MemoDto> list) {
         for(MemoDto param : list){
-            if(param.getMemoId() != null && param.getMemoId().isEmpty()){
+            if(param.getMemoId() == null || param.getMemoId().isEmpty()){
                 String uuid = UUID.randomUUID().toString();
                 param.setMemoId(uuid);
             }

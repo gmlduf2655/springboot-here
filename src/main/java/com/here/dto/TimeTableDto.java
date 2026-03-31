@@ -25,4 +25,8 @@ public class TimeTableDto {
     private String dumpTitle;
     private String priorityYn;
     private String status;
+
+    // 조회조건
+    private String startDate;
+    private String endDate;
 }
