@@ -47,6 +47,11 @@ public class TimeBoxService {
         return timeBoxMapper.selectWeeklyTimeTableList(param);
     }
 
+    // Monthly Calendar
+    public List<TimeTableDto> selectMonthlyCalendarList(TimeTableDto param) {
+        return timeBoxMapper.selectMonthlyCalendarList(param);
+    }
+
     public List<TimeTableDto> selectTimeTableByDumpId(TimeTableDto param) {
         return timeBoxMapper.selectTimeTableByDumpId(param);
     }

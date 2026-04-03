@@ -49,6 +49,11 @@ public class TimeBoxController {
         return timeBoxService.selectWeeklyTimeTableList(param);
     }
 
+    @GetMapping("/selectMonthlyCalendarList")
+    public List<TimeTableDto> selectMonthlyCalendarList(TimeTableDto param) {
+        return timeBoxService.selectMonthlyCalendarList(param);
+    }
+
     @GetMapping("/selectTimeTableByDumpId")
     public List<TimeTableDto> selectTimeTableByDumpId(TimeTableDto param) {
         return timeBoxService.selectTimeTableByDumpId(param);

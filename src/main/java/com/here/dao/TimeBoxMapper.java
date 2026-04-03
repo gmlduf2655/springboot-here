@@ -18,6 +18,7 @@ public interface TimeBoxMapper {
     // Time Table
     List<TimeTableDto> selectTimeTableList(TimeTableDto param);
     List<TimeTableDto> selectWeeklyTimeTableList(TimeTableDto param);
+    List<TimeTableDto> selectMonthlyCalendarList(TimeTableDto param);
     List<TimeTableDto> selectTimeTableByDumpId(TimeTableDto param);
     int saveTimeTable(TimeTableDto param);
     int deleteTimeTable(TimeTableDto param);
